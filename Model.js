@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { EOL } = require('os');
+
 class Model {
   static getQandA(userNum) {
     const userNumToInd = userNum - 1;
@@ -21,4 +22,5 @@ class Model {
     return arrs;
   }
 }
+
 module.exports = Model;

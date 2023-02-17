@@ -31,7 +31,9 @@ class Controller {
     }
 
     console.log(`Поздравляем! Ваш результат: ${score} очков!`);
+    allthemes()
   }
+  
 
   // printTopicsController(topicsMenu) {
   //   // Тут нужно попросить экземпляр класса view вывести меню пользователю,
