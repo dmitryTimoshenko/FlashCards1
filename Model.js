@@ -1,55 +1,26 @@
-const fs = require('fs')
-
-
+const fs = require('fs');
+const { EOL } = require('os');
 
 class Model {
-  constructor() { // конструктор создает связь между файлами для передачи в другие файлы  
+  static getQandA(userNum) {
+    const userNumToInd = userNum - 1;
+    const allThemes = fs.readdirSync('./topics');
+    const pickedTheme = allThemes[userNumToInd];
+    const questionStrings = fs.readFileSync(`./topics/${pickedTheme}`, 'utf-8');
+    const stringsToArr = questionStrings.split(`${EOL}`);
+    const onlyQuestionsArr = [];
+    const onlyAnswersArr = [];
+    stringsToArr.map((str) => {
+      if (str.includes('?') && str.length >= 2) {
+        onlyQuestionsArr.push(`${stringsToArr.indexOf(str) / 3 + 1}. ${str}`);
+      }
+      if (!str.includes('?') && str.length >= 2) {
+        onlyAnswersArr.push(str);
+      }
+    });
+    const arrs = [onlyQuestionsArr, onlyAnswersArr];
+    return arrs;
   }
-                                                                         // num вводит игрок  
-    static numberUser(){
-      // const number = num -1 
-    }
-  
-  allthemes (){
-    const themes = fs.readdirSync(`${__dirname}/topics`, 'utf-8')
-    const choiseThemes = themes[1]
-    const numberThemes = fs.readFileSync(`${__dirname}/topics/${choiseThemes}`, 'utf-8')
-    const string = numberThemes.split('\n')
-    const arrayQuations = []
-    const arrayAnswers = []
-    const arrays = string.map((str) => {
-    if(str.includes('?')){
-     arrayQuations.push(str)
-    }
-    if(!str.includes('?') && ' '){
-     arrayAnswers.push(str)
-    }
-})   
-  } 
 }
 
-
-
-// const themes = fs.readdirSync(`${__dirname}/topics`, 'utf-8')
-// const choiseThemes = themes[2]
-// const numberThemes = fs.readFileSync(`${__dirname}/topics/${choiseThemes}`, 'utf-8')
-// const string = numberThemes.split('\n')
-//  const arrayQuations = []
-//     const arrayAnswers = []
-// const arrays = string.map((str) => {
-//   if(str.includes('?')){
-//     arrayQuations.push(str)
-//   }
-//   if(!str.includes('?') && ' '){
-//     arrayAnswers.push(str)
-//   }
-
-// })
-// console.log(themes)
-// console.log(choiseThemes)
-// console.log(numberThemes)
-// console.log(string)
-// console.log(arrays)
-// console.log(arrayQuations)
-// console.log(arrayAnswers)
-module.exports = Model
+module.exports = Model;

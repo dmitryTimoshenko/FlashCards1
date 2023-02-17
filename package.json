@@ -23,6 +23,7 @@
     "eslint-plugin-import": "^2.27.5"
   },
   "dependencies": {
-    "enquirer": "^2.3.6"
+    "enquirer": "^2.3.6",
+    "readline-sync": "^1.4.10"
   }
 }
